@@ -1,0 +1,39 @@
+import gente.*
+import publicaciones.*
+import planeta.*
+
+describe "tecnicos" {
+	const nuria = new Tecnico(edad = 25)
+	const silvia = new Tecnico(edad = 43)
+	const man1 = new Manual(tema = "motores", esUtil = true, inteligenciaAportada = 5)
+	const man2 = new Manual(tema = "electronica", esUtil = true, inteligenciaAportada = 5)
+	const man3 = new Manual(tema = "jardineria", esUtil = false, inteligenciaAportada = 5)
+	const man4 = new Manual(tema = "electronica", esUtil = false, inteligenciaAportada = 5)
+	const nove1 = new Novela(tema = "literatura", esUtil = false, inteligenciaAportada = 3)
+	const nove2 = new Novela(tema = "literatura", esUtil = false, inteligenciaAportada = 12)
+	const triton = new Planeta()
+	method initialize() {
+		nuria.aniadirPublicacion(man1) 
+		nuria.aniadirPublicacion(man2)
+		nuria.aniadirPublicacion(man4)
+		nuria.aniadirPublicacion(nove1)
+		silvia.aniadirPublicacion(man3)
+		silvia.aniadirPublicacion(nove2)
+		nuria.ofrecerTributos(triton)
+		silvia.ofrecerTributos(triton)
+	}
+	test "inteligencia de nuria" { assert.equals(30, nuria.inteligencia()) }
+	test "inteligencia de silvia" { assert.equals(25, silvia.inteligencia()) }
+	test "nuria sabe de motores" { assert.that(nuria.sabeDelTema("motores")) }
+	test "nuria sabe de electronica" { assert.that(nuria.sabeDelTema("electronica")) }
+	test "nuria no sabe de jardineria" { assert.notThat(nuria.sabeDelTema("jardineria")) }
+	test "nuria sabe de literatura" { assert.that(nuria.sabeDelTema("literatura")) }
+	test "silvia no sabe de motores" { assert.notThat(silvia.sabeDelTema("motores")) }
+	test "silvia no sabe de electronica" { assert.notThat(silvia.sabeDelTema("electronica")) }
+	test "silvia sabe de jardineria" { assert.that(silvia.sabeDelTema("jardineria")) }
+	test "silvia sabe de literatura" { assert.that(silvia.sabeDelTema("literatura")) }
+	test "material menos util de nuria" { assert.equals(nove1, nuria.materialMenosUtil()) }
+	test "material menos util de silvia" { assert.equals(man3, silvia.materialMenosUtil()) }
+	test "cantidad de edificios de triton" { assert.equals(2, triton.cantidadEdificios()) }
+	test "cantidad de museos de triton" { assert.equals(0, triton.cantidadMuseos()) }
+}

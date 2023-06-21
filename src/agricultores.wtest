@@ -1,0 +1,25 @@
+import gente.*
+
+const irma = new Agricultor(edad = 28, aniosDeExperiencia = 3, sabeSobreRiego = false)
+
+describe "Irma test base" {
+	test "Inteligencia de Irma" { assert.equals(3, irma.inteligencia()) }
+	test "potencia de Irma" { assert.equals(5, irma.potencia()) }
+	test "Irma no debe ser destacada" { assert.notThat(irma.esDestacada()) }
+}
+
+describe "Irma despues de aprender sobre riego" {
+	method initialize() { irma.sabeSobreRiego(true) }
+	test "inteligencia de Irma" { assert.equals(6, irma.inteligencia()) }
+	test "Irma no debe ser destacada" { assert.notThat(irma.esDestacada()) }
+}
+
+describe "Irma despues de acumular 4 años de experiencia" {
+	method initialize() { 
+		irma.sabeSobreRiego(true)
+		irma.acumularExperiencia(4)
+	}
+	test "inteligencia de Irma" { assert.equals(14, irma.inteligencia()) }
+	test "Irma debe ser destacada" { assert.that(irma.esDestacada()) }
+	test "potencia de Irma" { assert.equals(5, irma.potencia()) }
+}
